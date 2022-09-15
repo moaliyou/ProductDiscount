@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ProductDiscount</string>
+    <string name="calculate_string">Calculation</string>
+    <string name="discount_of_product_string">Discount of Product</string>
+    <string name="calculate_button_string">Calculate</string>
+</resources>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calculate_string"
+        android:textColor="@color/blue"
+        android:textSize="64sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23" />
+
+    <TextView
+        android:id="@+id/subtitle_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/discount_of_product_string"
+        android:textColor="@color/navy_blue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_textview" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/product_price_textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Product Price $"
+        app:helperText="*Required"
+        app:layout_constraintEnd_toStartOf="@+id/percentage_discount_textInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle_textview"
+        app:prefixText="$">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/percentage_discount_textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Discount %"
+        app:helperText="*Required"
+        app:helperTextEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/product_price_textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle_textview"
+        app:prefixText="%">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/discount_amount_textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:enabled="false"
+        android:hint="$0.0"
+        app:helperText="Discount Amount"
+        app:helperTextEnabled="true"
+        app:layout_constraintStart_toStartOf="@+id/product_price_textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/product_price_textInputLayout"
+        app:prefixText="$">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/amount_textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:enabled="false"
+        android:hint="$0.0"
+        app:helperText="Amount to pay"
+        app:helperTextEnabled="true"
+        app:layout_constraintEnd_toEndOf="@id/percentage_discount_textInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/percentage_discount_textInputLayout"
+        app:prefixText="$">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/calculate_button"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/calculate_button_string"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/discount_amount_textInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/discount_amount_textInputLayout" />
+
+    <Button
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Reset"
+        android:textSize="14sp"
+        android:textColor="@color/blue"
+        app:icon="@drawable/ic_clear_all"
+        app:iconTint="@color/blue"
+        app:layout_constraintEnd_toEndOf="@id/amount_textInputLayout"
+        app:layout_constraintStart_toEndOf="@id/calculate_button"
+        app:layout_constraintTop_toBottomOf="@id/amount_textInputLayout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
