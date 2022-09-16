@@ -37,9 +37,9 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:hint="Product Price $"
+        android:hint="@string/product_price_string"
         app:helperText="*Required"
         app:layout_constraintEnd_toStartOf="@+id/percentage_discount_textInputLayout"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +57,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="32dp"
-        android:hint="Discount %"
+        android:hint="@string/discount_string"
         app:helperText="*Required"
         app:helperTextEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,9 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:enabled="false"
-        android:hint="$0.0"
-        app:helperText="Discount Amount"
-        app:helperTextEnabled="true"
+        android:hint="Discount Amount"
         app:layout_constraintStart_toStartOf="@+id/product_price_textInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/product_price_textInputLayout"
         app:prefixText="$">
@@ -90,7 +88,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:text="@string/discount_amount_string"
+            android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -100,16 +99,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:enabled="false"
-        android:hint="$0.0"
-        app:helperText="Amount to pay"
-        app:helperTextEnabled="true"
+        android:hint="Amount"
         app:layout_constraintEnd_toEndOf="@id/percentage_discount_textInputLayout"
         app:layout_constraintTop_toBottomOf="@id/percentage_discount_textInputLayout"
         app:prefixText="$">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/amount_string"
+            android:textColor="@color/black"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,10 +126,11 @@
     <Button
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
+        android:id="@+id/reset_button"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Reset"
+        android:text="@string/reset_button_string"
         android:textSize="14sp"
         android:textColor="@color/blue"
         app:icon="@drawable/ic_clear_all"

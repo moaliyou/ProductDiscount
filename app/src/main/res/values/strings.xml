@@ -3,4 +3,9 @@
     <string name="calculate_string">Calculation</string>
     <string name="discount_of_product_string">Discount of Product</string>
     <string name="calculate_button_string">Calculate</string>
+    <string name="reset_button_string">Reset</string>
+    <string name="product_price_string">Product Price $</string>
+    <string name="discount_string">Discount %</string>
+    <string name="discount_amount_string">0.00</string>
+    <string name="amount_string">0.00</string>
 </resources>
