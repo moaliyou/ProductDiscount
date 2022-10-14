@@ -92,17 +92,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void clearInputData() {
         Objects.requireNonNull(productPriceInputLayout.getEditText()).setText("");
         Objects.requireNonNull(discountPercentageInputLayout.getEditText()).setText("");
-        Objects.requireNonNull(discountAmountInputLayout.getEditText()).setText(R.string.discount_amount_string);
-        Objects.requireNonNull(amountInputLayout.getEditText()).setText(R.string.amount_string);
+        Objects.requireNonNull(discountAmountInputLayout.getEditText()).setText(R.string.discount_amount_hint_string);
+        Objects.requireNonNull(amountInputLayout.getEditText()).setText(R.string.amount_hint_string);
         discountPercentageInputLayout.getEditText().clearFocus();
         productPriceInputLayout.getEditText().clearFocus();
     }
 
     private void initializeViews() {
-        productPriceInputLayout = findViewById(R.id.product_price_textInputLayout);
-        discountPercentageInputLayout = findViewById(R.id.percentage_discount_textInputLayout);
-        discountAmountInputLayout = findViewById(R.id.discount_amount_textInputLayout);
-        amountInputLayout = findViewById(R.id.amount_textInputLayout);
+        productPriceInputLayout = findViewById(R.id.product_price_layout);
+        discountPercentageInputLayout = findViewById(R.id.percentage_discount_layout);
+        discountAmountInputLayout = findViewById(R.id.discount_amount_layout);
+        amountInputLayout = findViewById(R.id.amount_layout);
         calculateButton = findViewById(R.id.calculate_button);
         resetButton = findViewById(R.id.reset_button);
     }
