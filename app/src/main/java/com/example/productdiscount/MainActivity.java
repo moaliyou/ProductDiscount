@@ -20,16 +20,15 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-
-    private final DecimalFormat df = new DecimalFormat("0.00");
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        AdapterView.OnItemClickListener {
 
     // Creating objects for
     // text input layouts
     // to read the inputted data
     // and display the result
     private TextInputLayout productPriceInputLayout, discountPercentageInputLayout,
-            discountAmountInputLayout, amountInputLayout, productsDropDownMenuLayout;
+            discountAmountInputLayout, amountInputLayout;
     private AutoCompleteTextView productsDropDownMenu;
 
     // Creating objects for
@@ -47,8 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String product_price_value = Objects.requireNonNull(productPriceInputLayout.getEditText()).getText().toString();
-            String percentage_discount_value = Objects.requireNonNull(discountPercentageInputLayout.getEditText()).getText().toString();
+            String product_price_value = Objects.requireNonNull(
+                    productPriceInputLayout.getEditText()).getText().toString();
+
+            String percentage_discount_value = Objects.requireNonNull(
+                    discountPercentageInputLayout.getEditText()).getText().toString();
 
 
             if (!product_price_value.isEmpty() && !percentage_discount_value.isEmpty()) {
@@ -73,7 +75,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-            calculateButton.setEnabled(!product_price_value.isEmpty() && !percentage_discount_value.isEmpty() && !(productObject.getDiscountedAmount() >= productObject.getProductPrice()));
+            calculateButton.setEnabled(
+                    !product_price_value.isEmpty() && !percentage_discount_value.isEmpty()
+                    && !(productObject.getDiscountedAmount() >= productObject.getProductPrice())
+            );
         }
 
         @Override
@@ -137,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         discountPercentageInputLayout = findViewById(R.id.percentage_discount_layout);
         discountAmountInputLayout = findViewById(R.id.discount_amount_layout);
         amountInputLayout = findViewById(R.id.amount_layout);
-        productsDropDownMenuLayout = findViewById(R.id.products_dropDown_menu_layout);
         productsDropDownMenu = findViewById(R.id.products_dropDown_menu);
         calculateButton = findViewById(R.id.calculate_button);
         resetButton = findViewById(R.id.reset_button);
@@ -206,6 +210,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Selected Item " + parent.getItemAtPosition(position) + " at position " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,
+                "Selected Item " + parent.getItemAtPosition(position)
+                        + " at position " + position,
+                Toast.LENGTH_SHORT)
+                .show();
     }
 }
