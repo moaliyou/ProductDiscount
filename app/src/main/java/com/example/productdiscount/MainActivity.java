@@ -1,19 +1,26 @@
 package com.example.productdiscount;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.productdiscount.classes.Product;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -21,12 +28,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // text input layouts
     // to read the inputted data
     // and display the result
-    TextInputLayout productPriceInputLayout, discountPercentageInputLayout, discountAmountInputLayout, amountInputLayout;
+    private TextInputLayout productPriceInputLayout, discountPercentageInputLayout,
+            discountAmountInputLayout, amountInputLayout, productsDropDownMenuLayout;
+    private AutoCompleteTextView productsDropDownMenu;
 
     // Creating objects for
     // the button to calculate
     // and reset/clear input data
-    Button calculateButton, resetButton;
+    private Button calculateButton, resetButton;
+
+    private Product productObject;
 
     private final TextWatcher inputTextWatcher = new TextWatcher() {
         @Override
@@ -36,26 +47,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String product_price = Objects.requireNonNull(productPriceInputLayout.getEditText()).getText().toString();
-            String discount_percentage = Objects.requireNonNull(discountPercentageInputLayout.getEditText()).getText().toString();
+            String product_price_value = Objects.requireNonNull(productPriceInputLayout.getEditText()).getText().toString();
+            String percentage_discount_value = Objects.requireNonNull(discountPercentageInputLayout.getEditText()).getText().toString();
 
 
+            if (!product_price_value.isEmpty() && !percentage_discount_value.isEmpty()) {
+                productObject.setProductPrice(Double.parseDouble(product_price_value));
+                productObject.setPercentageDiscount(Double.parseDouble(percentage_discount_value));
 
-            if (!product_price.isEmpty() && !discount_percentage.isEmpty()){
-                double discountAmount = Double.parseDouble(product_price) * (Double.parseDouble(discount_percentage) / 100);
-                boolean isDiscountHigh = (discountAmount >= Double.parseDouble(product_price));
-                if (isDiscountHigh) {
+                if (productObject.getDiscountedAmount() >= productObject.getProductPrice()){
                     discountPercentageInputLayout.setHelperTextEnabled(false);
                     discountPercentageInputLayout.setErrorEnabled(true);
-                    discountPercentageInputLayout.setError("Error: high discount");
-                    Objects.requireNonNull(discountAmountInputLayout.getEditText()).setText(df.format(0));
-                    Objects.requireNonNull(amountInputLayout.getEditText()).setText(df.format(0));
+                    discountPercentageInputLayout.setError("Error: the discount % is higher");
+
+                    Objects.requireNonNull(discountAmountInputLayout.getEditText())
+                            .setText(R.string.discount_amount_hint_string);
+
+                    Objects.requireNonNull(amountInputLayout.getEditText())
+                            .setText(R.string.amount_hint_string);
                 } else {
+                    discountPercentageInputLayout.setErrorEnabled(false);
+                    discountPercentageInputLayout.setHelperTextEnabled(true);
                     discountPercentageInputLayout.setHelperText("*Required");
                 }
+
             }
 
-            calculateButton.setEnabled(!product_price.isEmpty() && !discount_percentage.isEmpty());
+            calculateButton.setEnabled(!product_price_value.isEmpty() && !percentage_discount_value.isEmpty() && !(productObject.getDiscountedAmount() >= productObject.getProductPrice()));
         }
 
         @Override
@@ -80,22 +98,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eventHandling();
 
         clearInputData();
+
+        fetchListOfProducts();
+
     }
 
     private void eventHandling() {
+
         resetButton.setOnClickListener(this);
         calculateButton.setOnClickListener(this);
-        Objects.requireNonNull(productPriceInputLayout.getEditText()).addTextChangedListener(inputTextWatcher);
-        Objects.requireNonNull(discountPercentageInputLayout.getEditText()).addTextChangedListener(inputTextWatcher);
+        productsDropDownMenu.setOnItemClickListener(this);
+
+        Objects.requireNonNull(productPriceInputLayout.getEditText())
+                .addTextChangedListener(inputTextWatcher);
+
+        Objects.requireNonNull(discountPercentageInputLayout.getEditText())
+                .addTextChangedListener(inputTextWatcher);
     }
 
     private void clearInputData() {
         Objects.requireNonNull(productPriceInputLayout.getEditText()).setText("");
         Objects.requireNonNull(discountPercentageInputLayout.getEditText()).setText("");
-        Objects.requireNonNull(discountAmountInputLayout.getEditText()).setText(R.string.discount_amount_hint_string);
-        Objects.requireNonNull(amountInputLayout.getEditText()).setText(R.string.amount_hint_string);
+
+        Objects.requireNonNull(discountAmountInputLayout.getEditText())
+                .setText(R.string.discount_amount_hint_string);
+
+        Objects.requireNonNull(amountInputLayout.getEditText())
+                .setText(R.string.amount_hint_string);
+
         discountPercentageInputLayout.getEditText().clearFocus();
         productPriceInputLayout.getEditText().clearFocus();
+        productsDropDownMenu.setText(null);
+
     }
 
     private void initializeViews() {
@@ -103,8 +137,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         discountPercentageInputLayout = findViewById(R.id.percentage_discount_layout);
         discountAmountInputLayout = findViewById(R.id.discount_amount_layout);
         amountInputLayout = findViewById(R.id.amount_layout);
+        productsDropDownMenuLayout = findViewById(R.id.products_dropDown_menu_layout);
+        productsDropDownMenu = findViewById(R.id.products_dropDown_menu);
         calculateButton = findViewById(R.id.calculate_button);
         resetButton = findViewById(R.id.reset_button);
+        productObject = new Product();
+
+        productObject.setListOfProducts(
+                Arrays.asList(this.getResources().getStringArray(R.array.list_of_products))
+        );
+
     }
 
     @Override
@@ -123,32 +165,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void calculateDiscountOfProduct() {
-        // getting input values
-        // to calculate discount of product
-        double product_price = Double.parseDouble(Objects.requireNonNull(productPriceInputLayout.getEditText()).getText().toString());
-        double discount_percentage = Double.parseDouble(Objects.requireNonNull(discountPercentageInputLayout.getEditText()).getText().toString());
+    private void fetchListOfProducts(){
 
-        // calculating the discount amount
-        // and the amount/price after the discount
-        double discount_amount = product_price * (discount_percentage / 100);
-        double amount_to_pay = product_price - discount_amount;
+        ArrayAdapter<String> productListAdapter = new ArrayAdapter<>(
+                MainActivity.this,
+                R.layout.list_products,
+                productObject.getListOfProducts()
+        );
 
-        if (discount_amount >= product_price){
-            discountPercentageInputLayout.setHelperTextEnabled(false);
-            discountPercentageInputLayout.setErrorEnabled(true);
-            discountPercentageInputLayout.setError("Error: high discount");
-            Objects.requireNonNull(discountAmountInputLayout.getEditText()).setText(df.format(0));
-            Objects.requireNonNull(amountInputLayout.getEditText()).setText(df.format(0));
-        } else {
-            discountPercentageInputLayout.setHelperText("*Required");
-            // displaying the discounted amount
-            // and the amount to pay
-            // after the discount to the user
-            Objects.requireNonNull(discountAmountInputLayout.getEditText()).setText(df.format(discount_amount));
-            Objects.requireNonNull(amountInputLayout.getEditText()).setText(df.format(amount_to_pay));
-        }
+        productsDropDownMenu.setAdapter(productListAdapter);
 
     }
 
+    private void calculateDiscountOfProduct() {
+        // getting input values
+        // to calculate discount of product
+       productObject.setProductPrice(
+               Double.parseDouble(
+                       Objects.requireNonNull(productPriceInputLayout.getEditText())
+                               .getText()
+                               .toString()
+               )
+       );
+
+       productObject.setPercentageDiscount(
+               Double.parseDouble(
+                       Objects.requireNonNull(discountPercentageInputLayout.getEditText())
+                               .getText()
+                               .toString()
+               )
+       );
+
+       Objects.requireNonNull(discountAmountInputLayout.getEditText())
+               .setText(String.valueOf(productObject.getDiscountedAmount()));
+
+       Objects.requireNonNull(amountInputLayout.getEditText())
+               .setText(String.valueOf(productObject.getAmountToPay()));
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(this, "Selected Item " + parent.getItemAtPosition(position) + " at position " + position, Toast.LENGTH_SHORT).show();
+    }
 }

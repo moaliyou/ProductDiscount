@@ -2,13 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.ProductDiscount" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/glitter_lake</item>
-        <item name="colorPrimaryVariant">@color/blue</item>
-        <item name="colorOnPrimary">@color/alice_blue</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/crayola</item>
-        <item name="colorSecondaryVariant">@color/iris_blue</item>
-        <item name="colorOnSecondary">@color/navy_blue</item>
+        <item name="colorPrimary">@color/primaryLightColor</item>
+        <item name="colorPrimaryVariant">@color/primaryColor</item>
+        <item name="colorOnPrimary">@color/primaryDarkColor</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

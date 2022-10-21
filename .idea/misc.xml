@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Kure Dema Bere/AndroidStudioProjects/ProductDiscount/app/src/main/res/drawable/list_products.xml" value="0.1945" />
         <entry key="..\:/Users/Kure Dema Bere/AndroidStudioProjects/ProductDiscount/app/src/main/res/layout/activity_main.xml" value="0.21" />
+        <entry key="..\:/Users/Kure Dema Bere/AndroidStudioProjects/ProductDiscount/app/src/main/res/layout/list_products.xml" value="0.1" />
       </map>
     </option>
   </component>

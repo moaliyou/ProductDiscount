@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="alice_blue">#DFF6FF</color>
-    <color name="glitter_lake">#47B5FF</color>
-    <color name="blue">#1363DF</color>
-
-    <color name="crayola">#90E0EF</color>
-    <color name="iris_blue">#00B4D8</color>
-    <color name="navy_blue">#03045E</color>
+    <color name="primaryColor">#205b7a</color>
+    <color name="primaryLightColor">#5488a9</color>
+    <color name="primaryDarkColor">#00324e</color>
+    <color name="primaryTextColor">#ffffff</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

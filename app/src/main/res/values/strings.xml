@@ -10,4 +10,20 @@
     <string name="amount_hint_string">0.00</string>
     <string name="discount_amount_string">Discount Amount</string>
     <string name="amount_string">Amount</string>
+    <string name="select_product_hint_string">Select Product</string>
+
+    <string-array name="list_of_products">
+        <item>Anchor Milk</item>
+        <item>Hilwa Milk</item>
+        <item>Hayat Oil - 3L</item>
+        <item>iPad Pen PXW-09</item>
+        <item>Nike Shoes DZL-821</item>
+        <item>Puma T-shirt DFXL-902</item>
+        <item>Puma T-shirt DFXS-802</item>
+        <item>Samsung S21 Ultra</item>
+        <item>Samsung A50</item>
+        <item>Mouse Pad</item>
+        <item>USB Charging UCD-0432</item>
+    </string-array>
+
 </resources>

@@ -17,13 +17,13 @@
             android:layout_height="wrap_content"
             android:text="@string/calculate_string"
             android:textAlignment="center"
-            android:textColor="@color/blue"
+            android:textColor="@color/primaryDarkColor"
             android:textSize="64sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".35" />
+            app:layout_constraintVertical_bias=".25" />
 
         <TextView
             android:id="@+id/subtitle_textview"
@@ -32,24 +32,45 @@
             android:layout_marginTop="16dp"
             android:text="@string/discount_of_product_string"
             android:textAlignment="center"
-            android:textColor="@color/navy_blue"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@id/title_textview"
             app:layout_constraintStart_toStartOf="@id/title_textview"
             app:layout_constraintTop_toBottomOf="@id/title_textview" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/products_dropDown_menu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:layout_constraintTop_toBottomOf="@id/subtitle_textview"
+            app:layout_constraintStart_toStartOf="@id/subtitle_textview"
+            app:layout_constraintEnd_toEndOf="@id/subtitle_textview"
+            android:hint="@string/select_product_hint_string">
+
+            <AutoCompleteTextView
+                android:id="@+id/products_dropDown_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="none"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/product_price_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:hint="@string/product_price_string"
             app:helperText="*Required"
             app:layout_constraintEnd_toStartOf="@id/percentage_discount_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/subtitle_textview"
+            app:layout_constraintTop_toBottomOf="@id/products_dropDown_menu_layout"
             app:prefixText="$">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -64,13 +85,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:hint="@string/discount_string"
             app:helperText="*Required"
             app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/product_price_layout"
-            app:layout_constraintTop_toBottomOf="@id/subtitle_textview"
+            app:layout_constraintTop_toBottomOf="@id/products_dropDown_menu_layout"
             app:prefixText="%">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -127,9 +148,10 @@
             android:layout_height="70dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/primaryColor"
             android:text="@string/calculate_button_string"
             android:textSize="16sp"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toStartOf="@id/reset_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discount_amount_layout" />
@@ -142,10 +164,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/reset_button_string"
-            android:textColor="@color/blue"
+            android:textColor="@color/primaryDarkColor"
             android:textSize="16sp"
             app:icon="@drawable/ic_clear_all"
-            app:iconTint="@color/blue"
+            app:iconTint="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/calculate_button"
             app:layout_constraintTop_toBottomOf="@id/amount_layout" />
